@@ -1,3 +1,3 @@
 class Remetric
-  VERSION = "0.0.2"
+  VERSION = "0.0.10"
 end

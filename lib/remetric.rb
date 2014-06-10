@@ -15,10 +15,8 @@ class Remetric
 
   def track data = {}
     begin
-      RestClient.post "#{endpoint}/events.json", {
-    		remetric_api_key: api_key,
-    		event: data
-      }
+      src = "#{endpoint}/track/img/#{base64}";
+      RestClient.get src
     rescue
       { errors: "You are unauthorized." }
     end
@@ -26,19 +24,19 @@ class Remetric
   
   def img data = {}
     base64 = to_base64 data
-    src = "#{endpoint}/events/img/#{base64}";
+    src = "#{endpoint}/track/img/#{base64}";
     img = "<img src=\"#{src}\" style=\"display: none; \">";
     img
   end
   
   def redirect data = {}
     base64 = to_base64 data
-    href = "#{endpoint}/events/redirect/#{base64}";
+    href = "#{endpoint}/track/redirect/#{base64}";
     href
   end
   
   def to_base64 data = {}
-    data["remetric_api_key"] = api_key
+    data["events_api_key"] = api_key
     URI.escape Base64.encode64(JSON.generate(data))
   end
 
